@@ -62,14 +62,14 @@
 
 <div class="container">
     <?php
-    $b=1;
+    $b=2;
     if(isset($_GET['picurl'])){
 
     }
     if ($b==1) {
         $picurl ='https://jp.netcdn.space/digital/video/';
     }elseif ($b==2){
-        $picurl ="https://pics.dmm.co.jp/digital/video/";
+        $picurl ="https://pics.dmm.co.jp/mono/movie/adult/";
         //$picurl ="";
     } ?>
     {{--<h3 >
@@ -107,41 +107,11 @@
             </p>
 
             <p><span class="header">磁力搜索:</span><a target="_blank"  href="{{$url_config['btsourl']}}<?php echo $movie_info['censored_id'] ?>"> <span style="color:#CC0000;"><?php echo $movie_info['censored_id'] ?></span></a></p>
-
+            <p>
             <p><span class="header">javbus:</span><a target="_blank"  href="https://{{$url_config['javbushost']}}/<?php echo $movie_info['censored_id'] ?>"> <span style="color:#CC0000;"><?php echo $movie_info['censored_id'] ?></span></a></p>
-
-
+            <p>
             <p><span class="header">avmoo:</span><a target="_blank"  href="https://{{$url_config['avmoohost']}}/cn/movie/<?php echo $movie_info['code_36'] ?>"> <span style="color:#CC0000;"><?php echo $movie_info['censored_id'] ?></span></a></p>
-
-            <p><span class="header">javlibrary:</span>
-                <a target="_blank"  href="http://{{$url_config['javlibhost']}}/cn/<?php echo ( $movie_info['javlib']['code_36'] ? '?v='.$movie_info['javlib']['code_36'] : 'vl_searchbyid.php?keyword='.$movie_info['censored_id']) ?>"> <span style=" "><?php echo $movie_info['censored_id'] ."({$movie_info['javlib']['usersowned']})({$movie_info['javlib']['userswanted']})({$movie_info['javlib']['userswatched']})" ?></span></a></p>
-
-            <!--   //cc3001.dmm.co.jp/litevideo/freepv/o/ofj/ofje00070/ofje00070_dmb_w.mp4
-            //cc3001.dmm.co.jp/litevideo/freepv/n/n_1/n_1010gihhd067/n_1010gihhd067_dmb_w.mp4
-http://www.q30x.com/cn/vl_searchbyid.php?keyword=ABS-231
--->
-            <p><span class="header">预告片:</span>
-
-
-                <a target="_blank"  href="https://cc3001.dmm.co.jp/litevideo/freepv/<?php
-                $pic_video = $movie_info['movie_pic_cover'];
-                if( is_numeric(substr($pic_video,0,1))){// 118abp00108/118abp00108pl.jpg
-                    $pic_video = substr($pic_video,0,strpos($pic_video,'/'));
-                    $idx = strpos($pic_video,'00');
-                    $pic_video =substr($pic_video,0,$idx).substr($pic_video,$idx+2,strlen($pic_video)-$idx-2) ;
-                    $pic_video = "$pic_video/{$pic_video}pl.jpg";
-                }
-                $pic_video = substr($pic_video,0,1)."/".substr($pic_video,0,3)."/".str_replace('pl.jpg','_dmb_w.mp4',$pic_video);
-                echo  $pic_video ?>"> <span  ><?php
-                        echo str_replace('_dmb_w.mp4','',basename($pic_video))    ?></span></a>
-
-                <a target="_blank"  href="https://cc3001.dmm.co.jp/litevideo/freepv/<?php
-                $pic_video = $movie_info['javlib']['movie_pic_cover'];
-                $pic_video = substr($pic_video,0,1)."/".substr($pic_video,0,3)."/".str_replace('pl.jpg','_dmb_w.mp4',$pic_video);
-                echo  $pic_video ?>"> <span  ><?php
-                        echo str_replace('_dmb_w.mp4','',basename($pic_video))    ?></span></a>
-            </p>
-
+            <p>
 
             @if ($movie_info['release_date'])
                 <span class="header">发行时间:</span><?php echo $movie_info['release_date'] ?>
@@ -161,6 +131,8 @@ http://www.q30x.com/cn/vl_searchbyid.php?keyword=ABS-231
                 <p><span class="header">发行商: </span><a href="censored?Label=<?php echo $movie_info['Label'] ?>"><?php echo $movie_info['label_name']['label_name'] ?></a></p>
             @endif
 
+
+
             @if ($movie_info['Series'])
                 <style>
                     .sphfont{
@@ -170,15 +142,22 @@ http://www.q30x.com/cn/vl_searchbyid.php?keyword=ABS-231
                 <p><span class="header sphfont "  >系列:</span><a target="_blank" href="censored?Series=<?php echo $movie_info['Series'] ?>"><?php echo $movie_info['series_name']['series_name'] ?></a></p>
             @endif
 
+
+
+
             <p>
                 <span class="header">类别: </span>
                 <?php $genre_map =[];//unset($genre_config[$val['genre_code']]); ?>
+
+
 
                     <?php  foreach($res_genre as $key=>$val): ?>
                     <span class="genre"><a datagenre= "{{$val['genre_code']}}"  href="censored?gc[]=<?php echo $val['genre_code'] ?>&mg=1&ltitle[]={{$val['genre_dsce']}}"><?php echo $val['genre_dsce'] ?></a></span>
                     <?php  $genre_map[$val['genre_code'].'_'] = 1; ?>
                     <?php endforeach; ?>
             </p>
+
+
             <p>
                 <span class="header">修改类别:</span>
                 <?php  foreach($genre_config as $key=>$val): ?>
@@ -190,6 +169,8 @@ http://www.q30x.com/cn/vl_searchbyid.php?keyword=ABS-231
 
                        onclick="change_genre(this,'{{$key}}')" >{{$val}}</a>
                 <?php endforeach; ?>
+
+
 
             </p>
 
@@ -217,9 +198,13 @@ http://www.q30x.com/cn/vl_searchbyid.php?keyword=ABS-231
                 <?php endforeach; ?>
 
                 <a class="btn btn-mini-new btn-default" title = "清除访问记录 {{$movie_info['visited']}} "
+
                    onclick="change_state('visited','0');$(this).html(0);" >{{$movie_info['visited']}}</a>
 
+
+
             </p>
+
 
 
             <p class="star-show">
@@ -574,7 +559,7 @@ http://www.q30x.com/cn/vl_searchbyid.php?keyword=ABS-231
                         }
                     },
                     showCaptionAsTitle: false,
-                    clearButton: '<span class="header" style = "color: #333">收藏评分: <i  title = "点击取消收藏" class="glyphicon glyphicon-minus-sign"></i></span>',
+                    clearButton: '<span class="header" style = "color: #333">收藏: <i  title = "点击取消收藏" class="glyphicon glyphicon-minus-sign"></i></span>',
                     // showCaption: false,
                     defaultCaption: '{rating} hh',
                     starCaptions: function (rating) {
